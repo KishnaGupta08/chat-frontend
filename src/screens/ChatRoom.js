@@ -24,7 +24,7 @@ const ChatRoom = ({ route,navigation }) => {
   useEffect(() => {
     const connectSocket = async () => {
       const token = await AsyncStorage.getItem('userToken');
-      socket.current = io('http://10.0.2.2:5000', {
+      socket.current = io('https://my-backend-app-e738.onrender.com', {
         query: { token },
       });
 
@@ -52,7 +52,7 @@ const ChatRoom = ({ route,navigation }) => {
          //setUserId(storedUserId); 
        // console.log(userId,"userId")
         if (token) {
-          const response = await fetch(`http://10.0.2.2:5000/api/messages/${receiveruserId}`, {
+          const response = await fetch(`https://my-backend-app-e738.onrender.com/api/messages/${receiveruserId}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ const ChatRoom = ({ route,navigation }) => {
         socket.current.emit('sendMessage', messageData);
 
         // Optionally save the message to the backend
-        await fetch('http://10.0.2.2:5000/api/messages', {
+        await fetch('https://my-backend-app-e738.onrender.com/api/messages', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ const ChatRoom = ({ route,navigation }) => {
     const token = await AsyncStorage.getItem('userToken');
     try {
       if (editingMessageId && newMessage.trim()) {
-        const response = await fetch(`http://10.0.2.2:5000/api/messages/${editingMessageId}`, {
+        const response = await fetch(`https://my-backend-app-e738.onrender.com/api/messages/${editingMessageId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ const ChatRoom = ({ route,navigation }) => {
   const deleteMessage = async (messageId) => {
     const token = await AsyncStorage.getItem('userToken');
     try {
-      await fetch(`http://10.0.2.2:5000/api/messages/${messageId}`, {
+      await fetch(`https://my-backend-app-e738.onrender.com/api/messages/${messageId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -180,8 +180,8 @@ const ChatRoom = ({ route,navigation }) => {
       <FlatList
         data={messages}
         renderItem={renderMessage}
-        keyExtractor={(item) => item._id.toString()}
-        inverted
+        keyExtractor={(item) => item._id}
+        
       />
 
       <View style={styles.inputContainer}>

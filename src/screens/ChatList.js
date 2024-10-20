@@ -14,7 +14,7 @@ const ChatList = ({ navigation }) => {
     try {
       const token = await AsyncStorage.getItem('userToken');
       if (token) {
-        const response = await fetch('http://10.0.2.2:5000/api/users', {
+        const response = await fetch('https://my-backend-app-e738.onrender.com/api/users', {
           method: 'GET', // Use GET if you are retrieving data
           headers: {
             'Content-Type': 'application/json',
